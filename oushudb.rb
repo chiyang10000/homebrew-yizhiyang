@@ -4,6 +4,7 @@ class Oushudb < Formula
   url "http://yum.oushu-tech.com/oushurepo/yumrepo/internal/linux/toolchain/OushuDB-Darwin.tar.xz"
   version "4.X"
 
+  depends_on "ossp-uuid"
   depends_on "hadoop"
   keg_only ""
 
