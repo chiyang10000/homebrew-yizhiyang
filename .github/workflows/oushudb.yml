@@ -1,0 +1,34 @@
+name: OushuDB CI
+
+on: [push]
+
+jobs:
+  install:
+
+    runs-on: macOS-10.14
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: brew repo
+      run: |
+        brew tap chiyang10000/homebrew-yizhiyang
+        brew search chiyang10000
+
+    - name: install
+      run: |
+        npm config delete prefix
+        brew install oushudb
+        source /usr/local/opt/oushudb/greenplum_path.sh && postgres -V
+
+    - name: initilize macOS
+      run: .github/workflows/scripts/init_macos.sh
+
+    - name: initilize HDFS
+      run: .github/workflows/scripts/init_hdfs.sh
+
+    - name: initilize OushuDB
+      run: .github/workflows/scripts/init_oushudb.sh
+
+    - name: test
+      run: .github/workflows/scripts/test_oushudb.sh
