@@ -1,0 +1,22 @@
+name: PlanChecker CI
+
+on: [push]
+
+jobs:
+  install:
+
+    runs-on: macOS-10.14
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: brew repo
+      run: |
+        brew tap chiyang10000/homebrew-yizhiyang
+        brew search chiyang10000
+
+    - name: install
+      run: |
+        brew install planchecker
+        nohup planchecker &
+        ps -ef | grep [p]lanchecker || exit 1
