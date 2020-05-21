@@ -30,11 +30,11 @@ tee /usr/local/opt/oushudb/etc/hawq-site.xml << EOF
     </property>
     <property>
         <name>hawq_master_directory</name>
-        <value>/db_data/hawq-data-directory/masterdd</value>
+        <value>/tmp/db_data/hawq-data-directory/masterdd</value>
     </property>
     <property>
         <name>hawq_segment_directory</name>
-        <value>/db_data/hawq-data-directory/segmentdd</value>
+        <value>/tmp/db_data/hawq-data-directory/segmentdd</value>
     </property>
     <property>
         <name>hawq_master_temp_directory</name>
@@ -54,11 +54,11 @@ tee /usr/local/opt/oushudb/etc/hawq-site.xml << EOF
     </property>
     <property>
         <name>hawq_magma_locations_master</name>
-        <value>file:///db_data/hawq-data-directory/magma_master</value>
+        <value>file:///tmp/db_data/hawq-data-directory/magma_master</value>
     </property>
     <property>
         <name>hawq_magma_locations_segment</name>
-        <value>file:///db_data/hawq-data-directory/magma_segment</value>
+        <value>file:///tmp/db_data/hawq-data-directory/magma_segment</value>
     </property>
     <property>
         <name>hawq_init_with_hdfs</name>
@@ -75,10 +75,10 @@ EOF
 
 # Initialize
 rm -rf /opt/dependency*
-rm -rf /db_data/hawq-data-directory
-install -d /db_data/hawq-data-directory/masterdd
-install -d /db_data/hawq-data-directory/segmentdd
-install -d /db_data/hawq-data-directory/magma_master
-install -d /db_data/hawq-data-directory/magma_segment
+rm -rf /tmp/db_data/hawq-data-directory
+install -d /tmp/db_data/hawq-data-directory/masterdd
+install -d /tmp/db_data/hawq-data-directory/segmentdd
+install -d /tmp/db_data/hawq-data-directory/magma_master
+install -d /tmp/db_data/hawq-data-directory/magma_segment
 source /usr/local/opt/oushudb/greenplum_path.sh
 hawq init cluster -a

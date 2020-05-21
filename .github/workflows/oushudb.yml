@@ -5,7 +5,7 @@ on: [push]
 jobs:
   install:
 
-    runs-on: macOS-10.14
+    runs-on: macOS-latest
 
     steps:
     - uses: actions/checkout@v1
@@ -13,13 +13,16 @@ jobs:
     - name: brew repo
       run: |
         brew tap chiyang10000/homebrew-yizhiyang
+        cd `brew --repository`/Library/Taps/chiyang10000/homebrew-yizhiyang
+        git fetch origin refs/heads/${GITHUB_REF##*/}:refs/remotes/origin/${GITHUB_REF##*/}
+        git checkout origin/${GITHUB_REF##*/}
         brew search chiyang10000
 
     - name: install
       run: |
         npm config delete prefix
         brew install oushudb
-        source /usr/local/opt/oushudb/greenplum_path.sh && postgres -V
+        sh -c 'source /usr/local/opt/oushudb/greenplum_path.sh && postgres -V'
 
     - name: initilize macOS
       run: .github/workflows/scripts/init_macos.sh

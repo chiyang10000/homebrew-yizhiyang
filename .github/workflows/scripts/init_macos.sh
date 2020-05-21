@@ -23,4 +23,4 @@ EOF
 </etc/sysctl.conf xargs sudo sysctl
 
 # Add data folder
-sudo install -o $USER -d /db_data/
+sudo install -o $USER -d /tmp/db_data/

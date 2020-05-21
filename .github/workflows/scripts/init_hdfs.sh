@@ -28,11 +28,11 @@ tee $HADOOP_HOME/etc/hadoop/hdfs-site.xml << EOF
 <configuration>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>file:///db_data/hdfs/name</value>
+        <value>file:///tmp/db_data/hdfs/name</value>
     </property>
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:///db_data/hdfs/data</value>
+        <value>file:///tmp/db_data/hdfs/data</value>
     </property>
     <property>
         <name>dfs.replication</name>
@@ -42,8 +42,8 @@ tee $HADOOP_HOME/etc/hadoop/hdfs-site.xml << EOF
 EOF
 
 # Initialize
-install -d /db_data/hdfs/name
-install -d /db_data/hdfs/data
+install -d /tmp/db_data/hdfs/name
+install -d /tmp/db_data/hdfs/data
 hdfs namenode -format
 
 # Start
