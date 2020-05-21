@@ -1,8 +1,8 @@
 require "formula"
 
 class Oushudb < Formula
-  url "http://yum.oushu-tech.com/oushurepo/yumrepo/internal/linux/toolchain/OushuDB-Darwin-2019-10-08.tar.xz"
-  sha256 "06532d9e353b77752a7bd687ace5a7436bcde488c5c2067b82c3b9c1dc0dbf5d"
+  url "http://yum.oushu-tech.com/oushurepo/yumrepo/internal/linux/toolchain/OushuDB-Darwin-2020-05-21.tar.xz"
+  sha256 "c9cc8d649755af3318daaf6da68b3d673c0b246145971393f8fa99a4ad99e8da"
   version "4.X"
 
   depends_on "hadoop"
