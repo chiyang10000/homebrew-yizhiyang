@@ -7,7 +7,16 @@ set -e
 sudo systemsetup -setremotelogin on
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 0700 ~/.ssh
 chmod 0600 ~/.ssh/authorized_keys
+
+tee -a ~/.ssh/config <<EOF_ssh_config
+Host *
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
+EOF_ssh_config
+
+ssh -v localhost whoami
 
 # Configure system kernel state
 sudo tee /etc/sysctl.conf << EOF
