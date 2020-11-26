@@ -35,3 +35,14 @@ jobs:
 
     - name: test
       run: .github/workflows/scripts/test_oushudb.sh
+
+    - name: tpc-h
+      run: |
+        git clone https://github.com/chiyang10000/yizhiyang
+        source /usr/local/opt/oushudb/greenplum_path.sh
+        hawq start cluster -a
+        export PGDATABASE=postgres
+        psql -af yizhiyang/sql/init_tpchschema.ext.sql
+        psql -af yizhiyang/sql/init_tpchschema.orc.sql
+        psql -af yizhiyang/sql/init_tpchschema.load.sql
+        psql -af yizhiyang/sql/init_tpchschema.analyze.sql
