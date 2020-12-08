@@ -22,7 +22,10 @@ jobs:
       run: |
         npm config delete prefix
         brew install oushudb
-        sh -c 'source /usr/local/opt/oushudb/greenplum_path.sh && postgres -V'
+
+    - name: check executable
+      timeout-minutes: 1
+      run: sh -c 'source /usr/local/opt/oushudb/greenplum_path.sh && postgres -V'
 
     - name: initilize macOS
       run: .github/workflows/scripts/init_macos.sh
