@@ -12,8 +12,8 @@ jobs:
 
     - name: brew repo
       run: |
-        brew tap chiyang10000/homebrew-yizhiyang
-        cd `brew --repository`/Library/Taps/chiyang10000/homebrew-yizhiyang
+        brew tap chiyang10000/homebrew-tap
+        cd `brew --repository`/Library/Taps/chiyang10000/homebrew-tap
         git fetch origin refs/heads/${GITHUB_REF##*/}:refs/remotes/origin/${GITHUB_REF##*/}
         git checkout origin/${GITHUB_REF##*/}
         brew search chiyang10000
@@ -25,7 +25,15 @@ jobs:
 
     - name: check executable
       timeout-minutes: 1
-      run: sh -c 'source /usr/local/opt/oushudb/greenplum_path.sh && postgres -V'
+      run: |
+        ls -lt /usr/local/opt/oushudb*
+        ls -lt /usr/local/Cellar/oushudb*
+        ls -lt /usr/local/Cellar/oushudb/
+        # have no idea why brew add unwanted .reinstall suffix
+        find /usr/local/Cellar/oushudb/ -name '*.reinstall' -type d -maxdepth 1 | sed -E 's|(.*)\.reinstall|\1.reinstall \1|' | xargs ln -snf
+        ls -lt /usr/local/Cellar/oushudb/
+        ls -lt /usr/local/opt/oushudb/
+        sh -c 'source /usr/local/opt/oushudb/greenplum_path.sh && postgres -V'
 
     - name: initilize macOS
       run: .github/workflows/scripts/init_macos.sh
@@ -39,13 +47,3 @@ jobs:
     - name: test
       run: .github/workflows/scripts/test_oushudb.sh
 
-    - name: tpc-h
-      run: |
-        git clone https://github.com/chiyang10000/yizhiyang
-        source /usr/local/opt/oushudb/greenplum_path.sh
-        hawq start cluster -a
-        export PGDATABASE=postgres
-        psql -af yizhiyang/sql/init_tpchschema.ext.sql
-        psql -af yizhiyang/sql/init_tpchschema.orc.sql
-        psql -af yizhiyang/sql/init_tpchschema.load.sql
-        psql -af yizhiyang/sql/init_tpchschema.analyze.sql

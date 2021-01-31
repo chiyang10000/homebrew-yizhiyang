@@ -12,7 +12,7 @@ jobs:
 
     - name: brew repo
       run: |
-        brew tap chiyang10000/homebrew-yizhiyang
+        brew tap chiyang10000/homebrew-tap
         brew search chiyang10000
 
     - name: install

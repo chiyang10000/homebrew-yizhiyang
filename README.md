@@ -2,8 +2,8 @@
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew tap chiyang10000/homebrew-yizhiyang
-brew search chiyang10000
+brew tap chiyang10000/homebrew-tap
+brew search chiyang10000/tap
 ```
 
 ## OushuDB

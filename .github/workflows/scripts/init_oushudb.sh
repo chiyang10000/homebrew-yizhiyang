@@ -4,7 +4,7 @@ set -e
 
 
 # Install
-brew tap chiyang10000/homebrew-yizhiyang
+brew tap chiyang10000/homebrew-tap
 brew search chiyang10000
 brew install oushudb
 
